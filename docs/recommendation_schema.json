@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InternalLinkOpportunity",
+  "type": "object",
+  "required": ["schema_version", "destination", "article", "scores", "decision", "anchor_analysis", "placement", "evidence"],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "destination": {
+      "type": "object",
+      "required": ["url", "url_normalized", "anchor_text"],
+      "properties": {
+        "url": {"type": "string", "format": "uri"},
+        "url_normalized": {"type": "string"},
+        "anchor_text": {"type": "string"}
+      }
+    },
+    "article": {
+      "type": "object",
+      "required": ["url", "title", "already_links_to_destination"],
+      "properties": {
+        "url": {"type": "string", "format": "uri"},
+        "title": {"type": "string"},
+        "already_links_to_destination": {"type": "boolean"}
+      }
+    },
+    "scores": {
+      "type": "object",
+      "required": ["overall_opportunity_score", "relevance_score", "placement_score", "confidence"],
+      "properties": {
+        "overall_opportunity_score": {"type": "number", "minimum": 0, "maximum": 100},
+        "relevance_score": {"type": "number", "minimum": 0, "maximum": 100},
+        "placement_score": {"type": "number", "minimum": 0, "maximum": 100},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "decision": {
+      "type": "object",
+      "required": ["linking_recommended", "decision_reason"],
+      "properties": {
+        "linking_recommended": {"type": "boolean"},
+        "decision_reason": {"type": "string"}
+      }
+    },
+    "anchor_analysis": {"type": "object"},
+    "placement": {"type": "object"},
+    "evidence": {
+      "type": "object",
+      "required": ["supporting_quotes", "warnings", "insufficient_evidence"],
+      "properties": {
+        "supporting_quotes": {"type": "array", "items": {"type": "string"}},
+        "warnings": {"type": "array", "items": {"type": "string"}},
+        "insufficient_evidence": {"type": "boolean"}
+      }
+    }
+  }
+}
